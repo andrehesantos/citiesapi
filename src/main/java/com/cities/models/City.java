@@ -5,8 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.springframework.data.geo.Point;
+
+@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "cidade")
+@TypeDefs(value = {@TypeDef(name = "point", typeClass = PoinType.class)})
 public class City {
 
 	@Id
@@ -21,8 +28,9 @@ public class City {
 	@Column(name = "ibge")
 	private Integer ibge;
 	
-	@Column(name = "lat_lon")
-	private String localizacao;
+	@Type(type = "point")
+	@Column(name = "lat_lon", updatable = false, insertable = false)
+	private Point localizacao;
 	
 	public City() {
 		
@@ -60,13 +68,15 @@ public class City {
 		this.ibge = ibge;
 	}
 
-	public String getLocalizacao() {
+	public Point getLocalizacao() {
 		return localizacao;
 	}
 
-	public void setLocalizacao(String localizacao) {
+	public void setLocalizacao(Point localizacao) {
 		this.localizacao = localizacao;
 	}
+
+
 	
 	
 }
