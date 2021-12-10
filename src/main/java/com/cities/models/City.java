@@ -3,13 +3,11 @@ package com.cities.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "estado")
-public class State {
+@Table(name = "cidade")
+public class City {
 
 	@Id
 	private Long id;
@@ -18,19 +16,15 @@ public class State {
 	private String nome;
 	
 	@Column(name = "uf")
-	private String uf;
+	private Integer uf;
 	
 	@Column(name = "ibge")
 	private Integer ibge;
 	
-	@ManyToOne
-	@JoinColumn(name = "pais" , referencedColumnName = "id")
-	private Country pais;
+	@Column(name = "lat_lon")
+	private String localizacao;
 	
-	@Column(name = "ddd")
-	private String ddd;
-	
-	public State() {
+	public City() {
 		
 	}
 
@@ -50,11 +44,11 @@ public class State {
 		this.nome = nome;
 	}
 
-	public String getUf() {
+	public Integer getUf() {
 		return uf;
 	}
 
-	public void setUf(String uf) {
+	public void setUf(Integer uf) {
 		this.uf = uf;
 	}
 
@@ -66,20 +60,12 @@ public class State {
 		this.ibge = ibge;
 	}
 
-	public Country getPais() {
-		return pais;
+	public String getLocalizacao() {
+		return localizacao;
 	}
 
-	public void setPais(Country pais) {
-		this.pais = pais;
-	}
-
-	public String getDdd() {
-		return ddd;
-	}
-
-	public void setDdd(String ddd) {
-		this.ddd = ddd;
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
 	}
 	
 	
